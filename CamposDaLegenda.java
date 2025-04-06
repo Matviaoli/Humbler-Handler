@@ -1,63 +1,49 @@
-package humblehandler;
-
-import java.awt.FlowLayout;
-import javax.swing.JFrame;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CamposDaLegenda extends JFrame{
-    
-    private JTextField pipoca, batata, pacoca;
+
+    private JTextField pipoca;
     private JPasswordField alcacus;
-    
+    private JButton ok;
+    private JLabel loggol;
+
     public CamposDaLegenda(){
-        
-        super("Pipoca Batata e paçoca");
-        setLayout(new FlowLayout());
-        
+
+        super("Pipoca e Alcaçus");
+        setLayout(null);
+        loggol = new JLabel(new ImageIcon("img.png"));
+        loggol.setBounds(10, 10, 242, 208);
+        add(loggol);
+
         pipoca = new JTextField(10);
+        pipoca.setBounds(262, 40, 120, 25);
         add (pipoca);
-        
-        batata = new JTextField("Insira o contexto ");
-        add(batata);
-        
-        pacoca = new JTextField("Texto Intankavel ", 21);
-        pacoca.setEditable(false);
-        add(pacoca);
-        
-        alcacus = new JPasswordField("Texto oculto ");
+
+        alcacus = new JPasswordField(10);
+        alcacus.setBounds(262, 80, 120, 25);
         add(alcacus);
-        
+
+        ok = new JButton("Ok");
+        ok.setBounds(300, 120, 60, 30);
+        add(ok);
+
         Humbler handler = new Humbler();
-        pipoca.addActionListener(handler);
-        batata.addActionListener(handler);
-        pacoca.addActionListener(handler);
-        alcacus.addActionListener(handler);
-       
+        ok.addActionListener(handler);
+
     }
-    
+
     private class Humbler implements ActionListener{
-      
+
         public void actionPerformed(ActionEvent event){
             String linha = "";
-            
-            if(event.getSource() == pipoca)
-                linha  = String.format("pipoca: %s", event.getActionCommand());
-                
-            else if(event.getSource() == batata)
-                linha  = String.format("batata: %s", event.getActionCommand());
-                
-            else if(event.getSource() == pacoca)
-                linha  = String.format("pacoca: %s", event.getActionCommand());
-                
-            else if(event.getSource() == alcacus)
-                linha  = String.format("alcacus: %s", event.getActionCommand());
-                
-                JOptionPane.showMessageDialog(null, linha);
-            
+            String senha = "";
+            linha  = pipoca.getText();
+            senha  = new String (alcacus.getPassword());
+
+            JOptionPane.showMessageDialog(null, "Ola "+linha+", sua senha é: "+senha);
+
         }
-    } 
+    }
 }
